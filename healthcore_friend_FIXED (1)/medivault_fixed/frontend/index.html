@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthCore MRMS — Kirish</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+</head>
+<body class="login-page">
+
+  <!-- CHAP PANEL: Brand + info -->
+  <div class="login-left">
+    <div class="login-brand">
+      <div class="login-brand-icon"><i class="ti ti-heart-rate-monitor"></i></div>
+      <div class="login-brand-name">Health<span>Core</span></div>
+    </div>
+    <h1 class="login-hero-title">Tibbiy yozuvlar<br><em>yangi darajada</em></h1>
+    <p class="login-hero-sub">Zamonaviy shifoxona uchun kompleks boshqaruv tizimi. Bemorlar, tashxislar va shifokorlar — barchasini bir joyda.</p>
+    <div class="login-features">
+      <div class="login-feature"><div class="login-feature-dot"></div>6 ta foydalanuvchi roli</div>
+      <div class="login-feature"><div class="login-feature-dot"></div>Real vaqtda navbat boshqaruvi</div>
+      <div class="login-feature"><div class="login-feature-dot"></div>ICD kodlari bilan tashxislar</div>
+      <div class="login-feature"><div class="login-feature-dot"></div>Yo'naltirish va shift jadvali</div>
+    </div>
+  </div>
+
+  <!-- O'NG PANEL: Login forma -->
+  <div class="login-right">
+    <div style="position:absolute;top:20px;right:20px">
+      <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Mavzu o'zgartirish">🌙</button>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="loginSection">
+      <div class="login-right-header">
+        <div class="login-right-title">Xush kelibsiz 👋</div>
+        <div class="login-right-sub">Tizimga kirish uchun ma'lumotlaringizni kiriting</div>
+      </div>
+      <form class="login-form" id="loginForm">
+        <div class="form-group">
+          <label>Foydalanuvchi nomi</label>
+          <input type="text" id="username" placeholder="username kiriting" autocomplete="username" required>
+        </div>
+        <div class="form-group">
+          <label>Parol</label>
+          <div class="password-wrap">
+            <input type="password" id="password" placeholder="parolni kiriting" autocomplete="current-password" required>
+            <button type="button" class="toggle-pwd" id="togglePwd">&#128065;</button>
+          </div>
+        </div>
+        <div class="login-error" id="loginError"></div>
+        <button type="submit" class="btn btn-primary btn-full" id="loginBtn">Tizimga kirish</button>
+      </form>
+      <div style="text-align:center;margin-top:14px">
+        <a href="#" onclick="showForgot()" style="font-size:13px;color:var(--navy-500);text-decoration:none;font-weight:600">
+          🔑 Parolni unutdingizmi?
+        </a>
+      </div>
+      <div class="demo-section">
+        <div class="demo-section-title">Demo hisoblar</div>
+        <div class="demo-grid">
+          <button class="demo-btn" onclick="fill('admin','Admin@2024')">Admin<span>Admin@2024</span></button>
+          <button class="demo-btn" onclick="fill('bosh_doc','BoshDoc@2024')">Bosh sh.<span>BoshDoc@2024</span></button>
+          <button class="demo-btn" onclick="fill('gp_karimov','GpKarimov@2024')">Mahalliy<span>GpKarimov@2024</span></button>
+          <button class="demo-btn" onclick="fill('kardio_rahimov','KardioRahimov@2024')">Tor sh.<span>KardioRahimov@2024</span></button>
+          <button class="demo-btn" onclick="fill('qabulxona1','Qabul@2024')">Qabulxona<span>Qabul@2024</span></button>
+          <button class="demo-btn" onclick="fill('bemor_001','Bemor001@2024')">Bemor<span>Bemor001@2024</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAROL TIKLASH -->
+    <div id="forgotSection" style="display:none">
+      <div id="step1">
+        <div class="login-right-header">
+          <div class="login-right-title">🔑 Parolni tiklash</div>
+          <div class="login-right-sub">Username kiriting</div>
+        </div>
+        <div class="login-form">
+          <div class="form-group">
+            <label>Foydalanuvchi nomi *</label>
+            <input type="text" id="forgot-username" placeholder="username">
+          </div>
+          <div class="form-error" id="step1Error"></div>
+          <button class="btn btn-primary btn-full" onclick="checkUsername()">Davom etish</button>
+          <div style="text-align:center;margin-top:10px">
+            <a href="#" onclick="showLogin()" style="font-size:13px;color:var(--gray-500)">← Loginga qaytish</a>
+          </div>
+        </div>
+      </div>
+      <div id="step2" style="display:none">
+        <div class="login-right-header">
+          <div class="login-right-title">🛡️ Xavfsizlik savoli</div>
+        </div>
+        <div class="login-form">
+          <div class="alert alert-info" id="savolText" style="margin-bottom:0"></div>
+          <div class="form-group">
+            <label>Javob *</label>
+            <input type="text" id="forgot-answer" placeholder="Javobingiz">
+          </div>
+          <div class="form-error" id="step2Error"></div>
+          <button class="btn btn-primary btn-full" onclick="checkAnswer()">Tekshirish</button>
+          <div style="text-align:center;margin-top:10px">
+            <a href="#" onclick="showStep1()" style="font-size:13px;color:var(--gray-500)">← Ortga</a>
+          </div>
+        </div>
+      </div>
+      <div id="step3" style="display:none">
+        <div class="login-right-header">
+          <div class="login-right-title">🔐 Yangi parol</div>
+        </div>
+        <div class="login-form">
+          <div class="form-group">
+            <label>Yangi parol *</label>
+            <input type="password" id="new-password" placeholder="Kamida 6 belgi">
+          </div>
+          <div class="form-group">
+            <label>Parolni tasdiqlang *</label>
+            <input type="password" id="confirm-password" placeholder="Qayta kiriting">
+          </div>
+          <div class="form-error" id="step3Error"></div>
+          <button class="btn btn-primary btn-full" onclick="resetPassword()">Parolni yangilash</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
