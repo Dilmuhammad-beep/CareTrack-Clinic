@@ -79,60 +79,7 @@ async function loadDashboard() {
           <td>${d.bemor ? d.bemor.firstName+' '+d.bemor.lastName : '—'}</td>
           <td><span class="badge badge-${ogirlikBadge[d.ogirlikDarajasi]||''}">${d.ogirlikDarajasi}</span></td></tr>`).join('')
       : `<tr><td colspan="3" class="table-empty">Ma'lumot yo'q</td></tr>`;
-
-    // Tashxislar grafigi
-    const ogirlikCount = { 'Yengil':0, "O'rtacha":0, "Og'ir":0, 'Kritik':0 };
-    dRes.data.forEach(d => { if (ogirlikCount[d.ogirlikDarajasi] !== undefined) ogirlikCount[d.ogirlikDarajasi]++; });
-    const diagCtx = document.getElementById('diagChart');
-    if (diagCtx) {
-      if (window.diagChartInst) window.diagChartInst.destroy();
-      window.diagChartInst = new Chart(diagCtx, {
-        type: 'doughnut',
-        data: {
-          labels: Object.keys(ogirlikCount),
-          datasets: [{
-            data: Object.values(ogirlikCount),
-            backgroundColor: ['#22c47a','#e8a020','#d93025','#6d28d9'],
-            borderWidth: 2, borderColor: '#fff'
-          }]
-        },
-        options: {
-          responsive: true, maintainAspectRatio: false,
-          plugins: { legend: { position: 'right', labels: { font: { size: 12 }, padding: 12 } } }
-        }
-      });
-    }
-  }
-
-  // Navbatlar grafigi
-  const aRes = await api.adminGetApps();
-  if (aRes?.success && document.getElementById('appChart')) {
-    const holatCount = { 'Tasdiqlangan':0, 'Kutilmoqda':0, 'Bekor qilindi':0 };
-    aRes.data.forEach(a => { if (holatCount[a.holati] !== undefined) holatCount[a.holati]++; });
-    if (window.appChartInst) window.appChartInst.destroy();
-    window.appChartInst = new Chart(document.getElementById('appChart'), {
-      type: 'bar',
-      data: {
-        labels: Object.keys(holatCount),
-        datasets: [{
-          label: 'Navbatlar',
-          data: Object.values(holatCount),
-          backgroundColor: ['#22c47a','#e8a020','#d93025'],
-          borderRadius: 6, borderSkipped: false
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          y: { beginAtZero: true, ticks: { stepSize: 1 }, grid: { color: '#f1f5f9' } },
-          x: { grid: { display: false } }
-        }
-      }
-    });
-  }
-}
-
+    
 // ─── SHIFOKORLAR ─────────────────────────────────
 async function loadDoctors() {
   const el = document.getElementById('doctors-content');
