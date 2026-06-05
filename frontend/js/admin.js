@@ -79,7 +79,9 @@ async function loadDashboard() {
           <td>${d.bemor ? d.bemor.firstName+' '+d.bemor.lastName : '—'}</td>
           <td><span class="badge badge-${ogirlikBadge[d.ogirlikDarajasi]||''}">${d.ogirlikDarajasi}</span></td></tr>`).join('')
       : `<tr><td colspan="3" class="table-empty">Ma'lumot yo'q</td></tr>`;
-    
+  }
+}
+
 // ─── SHIFOKORLAR ─────────────────────────────────
 async function loadDoctors() {
   const el = document.getElementById('doctors-content');
